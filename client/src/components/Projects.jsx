@@ -26,7 +26,6 @@ const cardVariants = {
 };
 
 const ProjectCard = ({ project, onClick, index }) => {
-    // Every 3rd item is "featured" (spans 2 columns) for variety
     const isFeatured = index % 3 === 0;
 
     return (

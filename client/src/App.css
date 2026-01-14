@@ -1,5 +1,5 @@
 /*Шрифт*/
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+/* Font loaded via index.html for performance */
 
 
 :root {
@@ -795,13 +795,19 @@ body {
 }
 
 @media (max-width: 768px) {
-  .navbar, .menu-overlay, .admin-container, .card-glass-bg {
-    backdrop-filter: blur(10px); /* Reduce blur amount */
+
+  .navbar,
+  .menu-overlay,
+  .admin-container,
+  .card-glass-bg {
+    backdrop-filter: blur(10px);
+    /* Reduce blur amount */
     -webkit-backdrop-filter: blur(10px);
   }
-  
+
   .project-card:hover {
-    box-shadow: none; /* Disable heavy shadows */
+    box-shadow: none;
+    /* Disable heavy shadows */
   }
 
   /* Preloader tweaks */

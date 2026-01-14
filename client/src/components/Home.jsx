@@ -1,20 +1,29 @@
 import React, { useState, useEffect, Suspense } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
-// Lazy load heavy 3D component
-const Background3D = React.lazy(() => import("./Background3D"));
+// Lazy load heavy 3D component with artificial delay to unblock main thread
+const Background3D = React.lazy(() => {
+    return new Promise(resolve => {
+        setTimeout(() => resolve(import("./Background3D")), 3000); // Wait 3s before even starting to load 3D
+    });
+});
 import "../App.css";
 import API_URL from "../api";
 
 function Home() {
     const [isOpen, setIsOpen] = useState(false);
     const [liked, setLiked] = useState(false);
+    // State to trigger render after delay
+    const [shouldRender3D, setShouldRender3D] = useState(false);
 
     useEffect(() => {
         const hasLiked = localStorage.getItem('portfolio_liked');
         if (hasLiked) {
             setLiked(true);
         }
+        // Enable 3D container after initial load
+        const timer = setTimeout(() => setShouldRender3D(true), 100);
+        return () => clearTimeout(timer);
     }, []);
 
     const handleLike = async () => {
@@ -32,9 +41,11 @@ function Home() {
     };
     return (
         <div className="base-container">
-            <Suspense fallback={<div className="canvas-placeholder" />}>
-                <Background3D />
-            </Suspense>
+            {shouldRender3D && (
+                <Suspense fallback={<div className="canvas-placeholder" />}>
+                    <Background3D />
+                </Suspense>
+            )}
 
             {/* Основной контент */}
             <motion.div

@@ -794,6 +794,24 @@ body {
   background: rgba(255, 255, 255, 0.2);
 }
 
+@media (max-width: 768px) {
+  .navbar, .menu-overlay, .admin-container, .card-glass-bg {
+    backdrop-filter: blur(10px); /* Reduce blur amount */
+    -webkit-backdrop-filter: blur(10px);
+  }
+  
+  .project-card:hover {
+    box-shadow: none; /* Disable heavy shadows */
+  }
+
+  /* Preloader tweaks */
+  .preloader {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: #000;
+  }
+}
+
 .modal-image-container {
   width: 100%;
   height: 400px;

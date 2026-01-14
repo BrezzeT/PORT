@@ -7,8 +7,9 @@ function ParticleField() {
 
     // Генерация позиций звезд вручную без лишних библиотек
     const positions = useMemo(() => {
-        const pos = new Float32Array(5000 * 3);
-        for (let i = 0; i < 5000; i++) {
+        const count = window.innerWidth < 768 ? 2000 : 4000; // Меньше частиц на мобильных
+        const pos = new Float32Array(count * 3);
+        for (let i = 0; i < count; i++) {
             // Создаем точки внутри сферы
             const r = 1.5;
             const theta = 2 * Math.PI * Math.random();
@@ -50,7 +51,7 @@ function ParticleField() {
 export default function Background3D() {
     return (
         <div className="canvas-container">
-            <Canvas camera={{ position: [0, 0, 1] }}>
+            <Canvas camera={{ position: [0, 0, 1] }} dpr={[1, 2]} performance={{ min: 0.5 }}>
                 <ParticleField />
             </Canvas>
         </div>

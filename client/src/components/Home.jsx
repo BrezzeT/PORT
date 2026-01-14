@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
-import Background3D from "./Background3D";
+// Lazy load heavy 3D component
+const Background3D = React.lazy(() => import("./Background3D"));
 import "../App.css";
 import API_URL from "../api";
 
@@ -31,7 +32,9 @@ function Home() {
     };
     return (
         <div className="base-container">
-            <Background3D />
+            <Suspense fallback={<div className="canvas-placeholder" />}>
+                <Background3D />
+            </Suspense>
 
             {/* Основной контент */}
             <motion.div

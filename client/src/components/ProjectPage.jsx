@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
 import Background3D from "./Background3D";
 import API_URL from "../api";
@@ -11,6 +11,7 @@ const ProjectPage = () => {
     const navigate = useNavigate();
     const [project, setProject] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [isImageZoomed, setIsImageZoomed] = useState(false);
 
     useEffect(() => {
         const fetchProject = async () => {
@@ -36,9 +37,32 @@ const ProjectPage = () => {
 
     if (!project) return null;
 
+    const currentYear = new Date().getFullYear();
+
     return (
         <div className="base-container scrollable-page">
             <Background3D />
+
+            <AnimatePresence>
+                {isImageZoomed && (
+                    <motion.div
+                        className="image-lightbox"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        onClick={() => setIsImageZoomed(false)}
+                    >
+                        <motion.img
+                            src={project.image_url}
+                            initial={{ scale: 0.8 }}
+                            animate={{ scale: 1 }}
+                            exit={{ scale: 0.8 }}
+                            onClick={(e) => e.stopPropagation()}
+                        />
+                        <button className="close-lightbox">×</button>
+                    </motion.div>
+                )}
+            </AnimatePresence>
 
             <motion.div
                 className="project-page-content"
@@ -48,30 +72,51 @@ const ProjectPage = () => {
             >
                 {/* Back Button */}
                 <Link to="/projects" className="back-link-float">
-                    <span className="arrow">←</span> <span>Back to Projects</span>
+                    <span className="arrow">←</span> <span>Back</span>
                 </Link>
 
                 {/* Hero Section */}
-                <div className="project-hero">
-                    <img
-                        src={project.image_url}
-                        alt={project.title}
-                        className="hero-image"
-                        onError={(e) => { e.target.style.display = 'none'; }}
-                    />
-                    <div className="hero-overlay"></div>
-                    <motion.div
-                        className="hero-text"
-                        initial={{ y: 50, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{ delay: 0.2 }}
-                    >
-                        <span className="category-tag">{project.category}</span>
-                        <h1>{project.title}</h1>
-                    </motion.div>
+                <div className="project-hero-modern">
+                    <div className="hero-bg-blur">
+                        <img src={project.image_url} alt="" />
+                    </div>
+
+                    <div className="project-hero-container">
+                        <motion.div
+                            className="hero-image-card"
+                            initial={{ x: -50, opacity: 0 }}
+                            animate={{ x: 0, opacity: 1 }}
+                            onClick={() => setIsImageZoomed(true)}
+                        >
+                            <img src={project.image_url} alt={project.title} />
+                            <div className="view-hint">Click to enlarge</div>
+                        </motion.div>
+
+                        <motion.div
+                            className="hero-main-text"
+                            initial={{ x: 50, opacity: 0 }}
+                            animate={{ x: 0, opacity: 1 }}
+                            transition={{ delay: 0.2 }}
+                        >
+                            <span className="category-tag">{project.category}</span>
+                            <h1>{project.title}</h1>
+                            <div className="hero-btns">
+                                {project.live_url && (
+                                    <motion.a
+                                        href={project.live_url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="btn-primary-small"
+                                        whileHover={{ scale: 1.05 }}
+                                    >
+                                        Live Preview
+                                    </motion.a>
+                                )}
+                            </div>
+                        </motion.div>
+                    </div>
                 </div>
 
-                {/* Info Grid */}
                 <div className="project-container-deep">
                     <div className="project-info-grid">
                         <motion.div
@@ -93,7 +138,7 @@ const ProjectPage = () => {
                                         whileHover={{ scale: 1.05 }}
                                         whileTap={{ scale: 0.95 }}
                                     >
-                                        ⚡ View Live Project
+                                        ⚡ Full Live Prototype
                                     </motion.a>
                                 )}
                                 {project.github_url && (
@@ -127,11 +172,11 @@ const ProjectPage = () => {
                             </div>
 
                             <div className="sidebar-card">
-                                <h3>Details</h3>
+                                <h3>Project Details</h3>
                                 <ul className="details-list">
                                     <li><span>Type</span> <span>Digital Product</span></li>
                                     <li><span>Client</span> <span>Portfolio Work</span></li>
-                                    <li><span>Year</span> <span>2024</span></li>
+                                    <li><span>Year</span> <span>{currentYear}</span></li>
                                 </ul>
                             </div>
                         </motion.div>
@@ -140,7 +185,7 @@ const ProjectPage = () => {
 
                 <footer className="project-footer">
                     <Link to="/projects" className="btn-text">
-                        Next Project <span className="arrow">→</span>
+                        Back to Gallery <span className="arrow">→</span>
                     </Link>
                 </footer>
             </motion.div>

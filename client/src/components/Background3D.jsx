@@ -27,8 +27,8 @@ function ParticleField() {
 
     useFrame((state, delta) => {
         if (ref.current) {
-            ref.current.rotation.x -= delta / 30; // Замедлил в 2 раза
-            ref.current.rotation.y -= delta / 40; // Замедлил в 2 раза
+            ref.current.rotation.x -= delta / 30; 
+            ref.current.rotation.y -= delta / 40; 
         }
     });
 

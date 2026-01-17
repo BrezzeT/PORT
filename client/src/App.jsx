@@ -7,6 +7,7 @@ const Projects = React.lazy(() => import('./components/Projects'));
 const Admin = React.lazy(() => import('./components/Admin'));
 const Contact = React.lazy(() => import('./components/Contact'));
 const About = React.lazy(() => import('./components/About'));
+const ProjectPage = React.lazy(() => import('./components/ProjectPage'));
 import Preloader from './components/Preloader';
 
 // Loading fallback for route transitions
@@ -46,6 +47,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/projects" element={<Projects />} />
+          <Route path="/project/:id" element={<ProjectPage />} />
           <Route path="/workspace-secret-99" element={<Admin />} />
         </Routes>
       </React.Suspense>

@@ -1578,20 +1578,163 @@ body {
   cursor: pointer;
 }
 
+/* Deep Content */
+.project-container-deep {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 80px 10%;
+  position: relative;
+  z-index: 5;
+}
+
+.project-info-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 80px;
+}
+
+.project-main-info h2 {
+  font-size: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 30px;
+  color: #fff;
+}
+
+.project-main-info p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 50px;
+}
+
+.project-links-large {
+  display: flex;
+  gap: 20px;
+}
+
+.btn-primary-large {
+  padding: 18px 36px;
+  background: #fff;
+  color: #000;
+  text-decoration: none;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.btn-outline-large {
+  padding: 18px 36px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.sidebar-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 35px;
+  border-radius: 24px;
+  margin-bottom: 30px;
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+}
+
+.sidebar-card h3 {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 25px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.tech-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tech-pill {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 8px 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 100px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.details-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.details-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  font-size: 0.85rem;
+}
+
+.details-list li span:first-child {
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 0.65rem;
+  letter-spacing: 1px;
+}
+
+.project-footer {
+  padding: 100px 10%;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+}
+
+.btn-text {
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-decoration: none;
+  color: #fff;
+  text-transform: uppercase;
+  transition: opacity 0.3s;
+}
+
 /* Mobile Fixes for Project Page */
 @media (max-width: 900px) {
   .project-hero-modern {
     height: auto;
-    padding: 120px 5% 60px;
+    padding: 120px 20px 60px;
+    flex-direction: column;
   }
 
   .project-hero-container {
     grid-template-columns: 1fr;
-    gap: 30px;
+    gap: 40px;
+    text-align: center;
+  }
+
+  .hero-image-card {
+    max-width: 500px;
+    margin: 0 auto;
+    width: 100%;
+    aspect-ratio: 16/9;
   }
 
   .hero-main-text h1 {
-    font-size: 3rem;
+    font-size: 2.2rem;
+    margin: 15px 0 20px;
   }
 
   .project-info-grid {
@@ -1602,25 +1745,53 @@ body {
   .back-link-float {
     top: 20px;
     left: 20px;
-    padding: 8px 16px;
-    font-size: 0.7rem;
+    padding: 12px 24px;
+    font-size: 0.75rem;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
   }
 
   .project-container-deep {
-    padding: 40px 5%;
+    padding: 50px 20px;
   }
 
   .project-main-info p {
     font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 40px;
   }
 
   .project-links-large {
     flex-direction: column;
+    gap: 12px;
   }
 
   .btn-primary-large,
   .btn-outline-large {
     text-align: center;
+    padding: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+  }
+
+  .image-lightbox {
     padding: 15px;
+  }
+
+  .image-lightbox img {
+    max-width: 100%;
+    max-height: 80vh;
+    border-radius: 8px;
+  }
+
+  .close-lightbox {
+    top: 15px;
+    right: 15px;
+    font-size: 2rem;
+    width: 45px;
+    height: 45px;
   }
 }

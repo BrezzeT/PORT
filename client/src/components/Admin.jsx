@@ -181,11 +181,11 @@ function Admin() {
                         </div>
                         <div className="form-group">
                             <label>GitHub URL</label>
-                            <input type="text" placeholder="e.g. https://github.com/username/repository" value={github_url} onChange={(e) => setGithubUrl(e.target.value)} required />
+                            <input type="text" placeholder="e.g. https://github.com/username/repository" value={github_url} onChange={(e) => setGithubUrl(e.target.value)} />
                         </div>
                         <div className="form-group">
                             <label>Live URL</label>
-                            <input type="text" placeholder="e.g. https://example.com" value={live_url} onChange={(e) => setLiveUrl(e.target.value)} required />
+                            <input type="text" placeholder="e.g. https://example.com" value={live_url} onChange={(e) => setLiveUrl(e.target.value)} />
                         </div>
 
                         <div className="form-group">
